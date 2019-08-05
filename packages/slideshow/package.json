@@ -1,0 +1,24 @@
+{
+  "name": "@bazaar/slideshow",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "spintronics <kevinbrown5124@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/slideshow.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@bazaar/layout": "^1.0.0",
+    "ionic": "^5.2.3",
+    "lit-element": "^2.2.1"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "scripts": {
+    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
+    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
+    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "test": "yarn build && karma start --coverage",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:update-snapshots": "karma start --update-snapshots",
+    "test:prune-snapshots": "karma start --prune-snapshots",
+    "test:compatibility": "karma start --compatibility all --coverage",
+    "test:compatibility:watch": "karma start --compatibility all --auto-watch=true --single-run=false",
+    "test:bs": "karma start karma.bs.config.js --legacy --coverage",
+    "site:build": "npm run storybook:build",
+    "storybook": "start-storybook -p 9001",
+    "start:build": "cd dist && es-dev-server --open",
+    "build": "tsc --build packages/**/tsconfig.json",
+    "pre-build": "gulp build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@material/mwc-icon": "^0.6.0",
+    "@material/mwc-linear-progress": "^0.6.0",
+    "@storybook/addon-a11y": "^5.1.10",
+    "@storybook/polymer": "5.2.0-beta.22",
+    "@types/lodash": "^4.14.136",
+    "@types/node": "^12.6.8",
+    "@types/ramda": "^0.26.18",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "extract-loader": "^3.1.0",
+    "globby": "^10.0.1",
+    "lerna": "^3.16.4",
+    "lit-element": "^2.2.1",
+    "lit-scss-loader": "^1.0.0",
+    "mocha": "^6.2.0",
+    "polymer-webpack-loader": "^2.0.3",
+    "prettier": "^1.18.2",
+    "sass": "^1.22.9",
+    "typescript": "^3.5.3",
+    "weightless": "^0.0.34"
+  },
+  "name": "ui",
+  "dependencies": {
+    "ramda": "^0.26.1"
+  }
+}

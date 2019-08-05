@@ -1,0 +1,11 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@bazaar/layout": "^1.0.0",
+    "ionic": "^5.2.3",
+    "lit-element": "^2.2.1"
+  }
+}

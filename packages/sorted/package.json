@@ -1,0 +1,14 @@
+{
+  "name": "@bazaar/sorted",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "spintronics <kevinbrown5124@gmail.com>",
+  "license": "MIT",
+  "main": "sorted.js",
+  "dependencies": {
+    "@bazaar/layout": "^1.0.0",
+    "ionic": "^5.2.3",
+    "lit-element": "^2.2.1",
+    "ramda": "^0.26.1"
+  }
+}
