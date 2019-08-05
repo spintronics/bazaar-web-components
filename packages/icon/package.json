@@ -7,7 +7,9 @@
   "main": "element.js",
   "dependencies": {
     "@bazaar/layout": "^1.0.0",
+    "@material/button": "^3.1.0",
     "@material/mwc-icon": "^0.6.0",
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.1"
   }
 }

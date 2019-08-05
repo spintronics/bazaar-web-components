@@ -15,56 +15,43 @@ storiesOf("progress", module)
     // let buffer = 'grey';
     let progress = text("Progress", "0.6");
     let primary = color("Primary color", "rebeccapurple");
-    let buffer = color("Buffer color", "grey");
+    let buffer = color("Buffer color", "lightgrey");
     let progressStyle = {
       "--progress-primary-color": primary,
       "--progress-buffer-color": buffer
     };
 
     return html`
-      <div>
-        <abu-section>
-          <abu-progress></abu-progress>
-        </abu-section>
-        <abu-section>
-          <abu-progress
-            style=${styleMap(progressStyle)}
-            determinate
-            progress=${progress}
-          ></abu-progress>
-        </abu-section>
-        <abu-section>
-          <abu-progress
-            style=${styleMap(progressStyle)}
-            determinate
-            buffer="0.1"
-            progress=${progress}
-          ></abu-progress>
-        </abu-section>
-        <abu-section>
-          <abu-progress
-            style=${styleMap(progressStyle)}
-            determinate
-            reverse
-            buffer="0.1"
-            progress=${progress}
-          ></abu-progress>
-        </abu-section>
-        <abu-section>
-          <abu-progress
-            style=${styleMap(progressStyle)}
-            determinate
-            progress=${progress}
-          ></abu-progress>
-        </abu-section>
-        <abu-section>
-          <abu-progress
-            style=${styleMap(progressStyle)}
-            determinate
-            reverse
-            progress=${progress}
-          ></abu-progress>
-        </abu-section>
-      </div>
+      <abu-section style=${styleMap(progressStyle)}>
+        <abu-progress></abu-progress>
+      </abu-section>
+      <abu-section>
+        <abu-progress style=${styleMap(progressStyle)} reverse></abu-progress>
+      </abu-section>
+      <abu-section>
+        <abu-progress
+          style=${styleMap(progressStyle)}
+          determinate
+          buffer="1"
+          progress=${progress}
+        ></abu-progress>
+      </abu-section>
+      <abu-section>
+        <abu-progress
+          style=${styleMap(progressStyle)}
+          determinate
+          buffer="0.7"
+          progress=${progress}
+        ></abu-progress>
+      </abu-section>
+      <abu-section>
+        <abu-progress
+          style=${styleMap(progressStyle)}
+          determinate
+          buffer="0.7"
+          reverse
+          progress=${progress}
+        ></abu-progress>
+      </abu-section>
     `;
   });

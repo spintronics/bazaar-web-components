@@ -1,8 +1,11 @@
 import { LitElement, property, css, html, customElement } from "lit-element";
-import style from "./ratings.style";
+// import style from "./ratings.style";
 import sum from "ramda/es/sum";
+import "@bazaar/progress";
 // import { repeat } from 'lit-html/directives/repeat';
-// import '@bazaar/layout';
+import "@bazaar/layout";
+import "@bazaar/icon";
+import { styleMap } from "lit-html/directives/style-map";
 
 interface Review {
   rating: number;
@@ -12,8 +15,17 @@ interface Review {
   downvotes: number;
   lastEdited: number;
 }
+
+interface ReviewTotals {
+  5: number;
+  4: number;
+  3: number;
+  2: number;
+  1: number;
+}
+
 interface RatingProperties {
-  reviewCount: number;
+  totals: ReviewTotals;
   reviews: Review[];
   average: number;
   productID: string;
@@ -28,9 +40,11 @@ interface RatingProperties {
 export class Ratings extends LitElement implements RatingProperties {
   @property({ type: Boolean }) hidden = false;
   @property({ type: Array }) reviews = [];
+  @property({ type: String }) productID = "12345";
+  @property({ type: Number }) average = 0;
   name = "ratings";
-  reviewCount = 0;
-  average = 0;
+  totals = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  totalReviews = 0;
   groupedReviews: Map<number, Review[]> = new Map([
     [1, []],
     [2, []],
@@ -38,22 +52,30 @@ export class Ratings extends LitElement implements RatingProperties {
     [4, []],
     [5, []]
   ]);
-  productID = "12345";
-  static get style() {
-    return [style, css``];
+  static get styles() {
+    return [
+      css`
+        :host {
+          display: block;
+        }
+      `
+    ];
   }
-  updated(changedProperties: Map<string | number | symbol, unknown>) {
-    if ("reviews" in changedProperties) {
-      this.average = this.calculateAverage();
-      this.groupedReviews = this.groupByRating();
+  deriveProperties() {
+    this.totalReviews = sum(Object.values(this.totals));
+    this.groupedReviews = this.groupByRating();
+  }
+  update(changedProperties: Map<string | number | symbol, unknown>) {
+    if (changedProperties.has("reviews") || changedProperties.has("totals")) {
+      this.deriveProperties();
     }
-    super.updated(changedProperties);
+    super.update(changedProperties);
   }
-  calculateAverage() {
-    const reviewRatings = this.reviews.map((review: Review) => review.rating);
-    if (!reviewRatings.length) return 0;
-    return sum(reviewRatings) / reviewRatings.length;
-  }
+  // calculateAverage() {
+  //   const reviewRatings = this.reviews.map((review: Review) => review.rating);
+  //   if (!reviewRatings.length) return 0;
+  //   return sum(reviewRatings) / reviewRatings.length;
+  // }
   groupByRating() {
     this.groupedReviews.clear();
     return this.reviews.reduce((acc, review: Review) => {
@@ -65,6 +87,7 @@ export class Ratings extends LitElement implements RatingProperties {
   }
   constructor() {
     super();
+    this.deriveProperties();
   }
   connectedCallback() {
     super.connectedCallback();
@@ -73,15 +96,19 @@ export class Ratings extends LitElement implements RatingProperties {
     super.disconnectedCallback();
   }
   protected starIcon(filled = true) {
-    //override this..
-    //assuming mwc-icon registered.. change this to use internal icon
     return html`
-      <mwc-icon>${filled ? "star" : "star-border"}</mwc-icon>
+      <abu-icon
+        style=${styleMap({
+          verticalAlign: "middle",
+          "--icon-font-size": ".5rem"
+        })}
+        >${filled ? "star" : "star_border"}</abu-icon
+      >
     `;
   }
   protected percentageIndicator(value = 0) {
     return html`
-      <mwc-linear-progress determinate progress=${value}></mwc-linear-progress>
+      <abu-progress determinate progress=${value} buffer="1"></abu-progress>
     `;
   }
   protected reviewLink(
@@ -94,30 +121,39 @@ export class Ratings extends LitElement implements RatingProperties {
   }
   render() {
     let fiveStar = Array(5).fill(0);
+    let shrink = {
+      flexGrow: "0",
+      whiteSpace: "nowrap"
+    };
     return html`
       <h3>
         Overall rating ${this.starIcon()} ${this.average.toFixed(1)}
       </h3>
-      <div>Based on ${this.reviews.length} reviews</div>
-      <abu-flex>
-        ${[5, 4, 3, 2, 1].map((count, x) => {
+      <h4>Based on ${this.reviews.length} reviews</h4>
+      <abu-flex
+        style=${styleMap({ flexFlow: "row wrap", display: "inline-flex" })}
+      >
+        ${[5, 4, 3, 2, 1].map((count, _) => {
           let group = this.groupedReviews.get(count) || [];
           return html`
-            <abu-row>
-              <abu-flex --flex-shrink="1">
-                ${fiveStar.map((_, dex) => this.starIcon(dex <= x))}
+            <abu-row style=${styleMap({ "--column-gap": "16px" })}>
+              <abu-flex style=${styleMap(shrink)}>
+                ${fiveStar.map((_, dex) => this.starIcon(dex < count))}
               </abu-flex>
-              <abu-flex --flex-grow="1">
-                ${this.percentageIndicator(group.length / this.reviewCount)}
+              <abu-flex style=${styleMap({ alignItems: "center" })}>
+                ${this.percentageIndicator(
+                  this.totals[count] / this.totalReviews
+                )}
               </abu-flex>
-              <abu-flex --flex-shrink="1">
+              <abu-flex style=${styleMap(shrink)}>
                 (${this.reviewLink(1, group.length)})
               </abu-flex>
             </abu-row>
           `;
         })}
+        <br />
         <div>
-          ${this.reviewLink("", `View all ${this.reviewCount} reviews`)}
+          ${this.reviewLink("", `View all ${this.totalReviews} reviews`)}
         </div>
       </abu-flex>
     `;

@@ -1,0 +1,7 @@
+<script>
+  var dce = window.customElements.define;
+  window.customElements.define = function(...args) {
+    if (window.customElements.get(args[0])) return;
+    return dce.apply(window.customElements, args);
+  };
+</script>

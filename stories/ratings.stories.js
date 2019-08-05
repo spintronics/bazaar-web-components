@@ -17,6 +17,13 @@ const review = {
 
 const fixture = {
   productID: 12345,
+  totals: {
+    1: 1,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 1
+  },
   reviews: [
     review,
     {
@@ -28,14 +35,16 @@ const fixture = {
 };
 
 storiesOf("ratings", module)
-  // .addDecorator(withKnobs)
+  .addDecorator(withKnobs)
   .add(
     "full-size",
     () => html`
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-      />
-      <abu-ratings .reviews=${fixture}></abu-ratings>
+      <abu-ratings
+        productID=${fixture.productID}
+        .totals=${fixture.totals}
+        .reviews=${fixture.reviews}
+        average=${2.5}
+        style="width: 500px;"
+      ></abu-ratings>
     `
   );

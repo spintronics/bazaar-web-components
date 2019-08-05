@@ -1,12 +1,12 @@
 0 silly argv {
 0 silly argv   _: [ 'add' ],
-0 silly argv   globs: [ 'packages/progress' ],
+0 silly argv   globs: [ 'packages/icon' ],
 0 silly argv   lernaVersion: '3.16.4',
 0 silly argv   '$0': '/usr/local/bin/lerna',
-0 silly argv   pkg: '@material/mwc-progress'
+0 silly argv   pkg: '@material/icon'
 0 silly argv }
 1 notice cli v3.16.4
 2 verbose rootPath /Users/kevin.brown/code/bazaar/ui
 3 info versioning independent
-4 error Error: 404 Not Found - GET https://registry.npmjs.org/@material%2fmwc-progress - Not found
+4 error Error: 404 Not Found - GET https://registry.npmjs.org/@material%2ficon - Not found
 4 error     at /Users/kevin.brown/code/bazaar/ui/node_modules/@evocateur/npm-registry-fetch/check-response.js:104:15

@@ -1,8 +1,15 @@
 import { LitElement, css, html, customElement } from "lit-element";
-import style from "./layout.style";
+import style from "./layout.style.js";
 
 export class Layout extends LitElement {
-  static styles = [style];
+  static styles = [
+    style,
+    css`
+      :host {
+        display: block;
+      }
+    `
+  ];
   render() {
     return html`
       <slot></slot>
@@ -74,22 +81,27 @@ export class Flex extends Layout {
 }
 
 /**
- * @cssvar --column-padding
- * @classname has_padding_around
+ * @cssvar --column-gap
  */
 @customElement("abu-row")
-export class Row extends Flex {
+export class Columns extends Flex {
   static get styles() {
     return [
       ...super.styles,
       css`
         :host {
-          flex-flow: row nowrap;
+          displat: flex;
           justify-content: space-around;
+          width: 100%;
+          margin: 0 calc(var(--column-gap) * -1);
+          padding: 0 var(--column-gap);
         }
-        :host(.has_padding_around) {
-          margin: 0 -15px;
-          padding: 0 15px;
+        ::slotted(*) {
+          display: block;
+          flex-basis: 0;
+          flex-grow: 1;
+          flex-shrink: 1;
+          padding: 0 var(--column-gap, 0px);
         }
       `
     ];

@@ -1,17 +1,19 @@
-require = require("esm")(module);
 const fs = require("fs");
 const globby = require("globby");
 const prettier = require("prettier");
 const sass = require("sass");
+const path = require("path");
 
 let jscss = style =>
   prettier.format(String.raw`
     import {unsafeCSS} from 'lit-element';
-    export default ${"unsafeCSS('" + style + "');"}
+    export default ${"unsafeCSS('" + style.css.toString() + "');"}
   `);
 
 (async () => {
-  let styles = await globby("../packages/[!node_modules]**/src/*.s{c|a}ss");
+  let styles = globby.sync(
+    path.join(__dirname, "../packages/{,!(node_modules)}**/src/*.s{a|c}ss")
+  );
   console.log("styles", styles);
   return Promise.all(
     styles.map(path =>

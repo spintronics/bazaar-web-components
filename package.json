@@ -16,8 +16,7 @@
     "site:build": "npm run storybook:build",
     "storybook": "start-storybook -p 9001",
     "start:build": "cd dist && es-dev-server --open",
-    "build": "tsc --build packages/**/tsconfig.json",
-    "pre-build": "gulp build"
+    "build": "node scripts/jsass; tsc --build packages/**/tsconfig.json"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

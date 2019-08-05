@@ -1,11 +1,11 @@
-# `element`
+# `layout`
 
 > TODO: description
 
 ## Usage
 
 ```
-const slideshow = require('slideshow');
+const layout = require('layout');
 
 // TODO: DEMONSTRATE API
 ```

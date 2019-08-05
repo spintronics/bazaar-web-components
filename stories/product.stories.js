@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/polymer";
 import { Product } from "../packages/product/product.js";
 
 // window.customElements.define('abu-product', Product);
-storiesOf("abu-product", module)
+storiesOf("product", module)
   // .addDecorator(withKnobs)
   .add(
     "search product",

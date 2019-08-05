@@ -1,5 +1,5 @@
-import { css, customElement } from 'lit-element';
-import { LinearProgress } from '@material/mwc-linear-progress';
+import { css, customElement } from "lit-element";
+import { LinearProgress } from "@material/mwc-linear-progress";
 // import { layout } from '@bazaar/layout';
 // import style from './element.style';
 
@@ -7,7 +7,7 @@ import { LinearProgress } from '@material/mwc-linear-progress';
  * @cssvar progress-buffer-color
  * @cssvar progress-primary-color
  */
-@customElement('abu-progress')
+@customElement("abu-progress")
 export class Progress extends LinearProgress {
   static get styles() {
     return css`
@@ -17,6 +17,10 @@ export class Progress extends LinearProgress {
       }
       .mdc-linear-progress__bar-inner {
         background-color: var(--progress-primary-color, #6200ee);
+      }
+      :host {
+        width: 100%;
+        display: inline-block;
       }
     `;
   }
