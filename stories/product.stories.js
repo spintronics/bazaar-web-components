@@ -4,12 +4,11 @@ import { storiesOf } from "@storybook/polymer";
 
 import { Product } from "../packages/product/product.js";
 
-// window.customElements.define('abu-product', Product);
-storiesOf("product", module)
-  // .addDecorator(withKnobs)
-  .add(
-    "search product",
-    () => html`
-      <abu-product></abu-product>
-    `
-  );
+// storiesOf("product", module)
+//   // .addDecorator(withKnobs)
+//   .add(
+//     "search product",
+//     () => html`
+//       <abu-product></abu-product>
+//     `
+//   );

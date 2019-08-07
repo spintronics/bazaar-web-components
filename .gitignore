@@ -2,9 +2,10 @@ packages/**/*.js
 packages/**/*.js.map
 packages/**/*.d.ts
 packages/**/*.d.ts.map
-node_modules
+node_modules/
 coverage
 *.tsbuildinfo
 packages/template
 yarn-error.log
 yarn.lock
+packages/**/node_modules/

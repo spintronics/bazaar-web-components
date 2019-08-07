@@ -1,14 +1,14 @@
 import { LitElement, css, html, customElement } from "lit-element";
-import style from "./layout.style.js";
+const style = require("./layout.scss");
 
 export class Layout extends LitElement {
-  static styles = [
-    style,
+  static style = [
     css`
       :host {
         display: block;
       }
-    `
+    `,
+    style.default
   ];
   render() {
     return html`
@@ -49,7 +49,7 @@ export class Hero extends Layout {
   render() {
     return html`
       <slot name="head" class="hero-head"></slot>
-      <slot name="body" class="hero-body"></slot>
+      <slot class="hero-body"></slot>
       <slot name="foot" class="hero-foot"></slot>
     `;
   }

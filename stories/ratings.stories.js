@@ -2,7 +2,7 @@ import { text, color, withKnobs } from "@storybook/addon-knobs";
 import { html } from "lit-element";
 import { storiesOf } from "@storybook/polymer";
 
-import { Ratings } from "../packages/ratings/ratings.js";
+import { Ratings } from "../packages/ratings/src/ratings.ts";
 import "@material/mwc-icon";
 // import '@material/mwc-linear-progress';
 
@@ -17,7 +17,7 @@ const review = {
 
 const fixture = {
   productID: 12345,
-  totals: {
+  reviewTotals: {
     1: 1,
     2: 0,
     3: 0,
@@ -37,11 +37,11 @@ const fixture = {
 storiesOf("ratings", module)
   .addDecorator(withKnobs)
   .add(
-    "full-size",
+    "overview",
     () => html`
       <abu-ratings
         productID=${fixture.productID}
-        .totals=${fixture.totals}
+        .totals=${fixture.reviewTotals}
         .reviews=${fixture.reviews}
         average=${2.5}
         style="width: 500px;"

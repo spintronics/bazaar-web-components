@@ -1,16 +1,11 @@
 {
-  "name": "@bazaar/layout",
+  "name": "@bazaar/styles",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "spintronics <kevinbrown5124@gmail.com>",
-  "license": "MIT",
-  "main": "layout.js",
-  "dependencies": {
-    "@bazaar/styles": "^1.0.0",
-    "lit-element": "^2.2.1",
-    "lit-html": "^1.1.1"
-  },
   "homepage": "https://github.com/spintronics/bazaar-web-components#readme",
+  "license": "MIT",
+  "main": "variables.style.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

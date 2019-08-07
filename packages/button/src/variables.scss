@@ -6,7 +6,7 @@
   --button-padding-horizontal: 0.75em;
   --button-border-radius: var(--radius)
   
-  --button-color: var(--grey-darker);
+  --button-color: var(--grey-darker, black);
   --button-background-color: var(--white);
   --button-border-color: var(--grey-lighter);
   --button-box-shadow: 0 0 0 0;

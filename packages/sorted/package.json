@@ -7,6 +7,7 @@
   "main": "sorted.js",
   "dependencies": {
     "@bazaar/layout": "^1.0.0",
+    "@bazaar/styles": "^1.0.0",
     "ionic": "^5.2.3",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.1",

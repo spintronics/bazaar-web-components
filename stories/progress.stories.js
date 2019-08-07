@@ -3,8 +3,8 @@ import { text, color, withKnobs } from "@storybook/addon-knobs";
 import { html } from "lit-element";
 import { storiesOf } from "@storybook/polymer";
 
-import { Progress } from "../packages/progress/progress.js";
-import { Section } from "../packages/layout/layout.js";
+import { Progress } from "../packages/progress/src/progress.ts";
+import { Section } from "../packages/layout/src/layout.ts";
 import { styleMap } from "lit-html/directives/style-map";
 
 storiesOf("progress", module)

@@ -7,6 +7,9 @@
   "main": "button.js",
   "dependencies": {
     "@bazaar/layout": "^1.0.0",
+    "@bazaar/styles": "^1.0.0",
+    "@material/mwc-button": "^0.6.0",
+    "@types/node-sass": "^4.11.0",
     "decko": "^1.2.0",
     "ionic": "^5.2.3",
     "lit-element": "^2.2.1",

@@ -31,13 +31,10 @@ let jscss = style =>
       })
         .then(jscss)
         .then(output => {
-          return Promise.all([
-            fs.promises.writeFile(path.replace(/s[ac]ss$/, "style.js"), output),
-            fs.promises.writeFile(
-              path.replace("/src", "").replace(/s[ac]ss$/, "style.js"),
-              output
-            )
-          ]);
+          return fs.promises.writeFile(
+            path.replace("/src", "").replace(/s[ac]ss$/, "style.js"),
+            output
+          );
         })
     )
   );

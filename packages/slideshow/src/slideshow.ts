@@ -1,5 +1,12 @@
-import { LitElement, query, property, css, html } from 'lit-element';
-
+import {
+  LitElement,
+  query,
+  property,
+  css,
+  html,
+  customElement
+} from "lit-element";
+@customElement("abu-slideshow")
 export class Slideshow extends LitElement {
   @query('[action="previous"]') previousSlide;
   @query('[action="next"]') nextSlide;
@@ -13,28 +20,38 @@ export class Slideshow extends LitElement {
         :host {
           display: block;
           width: 100%;
-          height: 500px;
           position: relative;
+          display: flex;
+          align-items: stretch;
+          height: var(--slide-height, initial);
         }
 
         .slide-container {
-          height: 100%;
           overflow: auto;
-          align-items: stretch;
           position: relative;
           scroll-snap-type: x mandatory;
           display: block;
           overflow: scroll hidden;
           position: relative;
-          height: inherit;
+          height: 100%;
           white-space: nowrap;
         }
         ::slotted(*) {
+          display: inline-flex;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          color: white;
+          border-radius: var(--radius, 4px);
+          justify-content: middle;
+          justify-items: middle;
+          height: 100%;
           width: var(--slide-width, 100%);
           scroll-snap-align: start;
           white-space: normal;
+          flex-flow: column nowrap;
         }
-      `,
+      `
     ];
   }
   constructor() {

@@ -3,7 +3,7 @@ import { LitElement, property, css, html, customElement } from "lit-element";
 import sum from "ramda/es/sum";
 import "@bazaar/progress";
 // import { repeat } from 'lit-html/directives/repeat';
-import "@bazaar/layout";
+// import "@bazaar/layout";
 import "@bazaar/icon";
 import { styleMap } from "lit-html/directives/style-map";
 
@@ -151,10 +151,9 @@ export class Ratings extends LitElement implements RatingProperties {
             </abu-row>
           `;
         })}
-        <br />
-        <div>
+        <p>
           ${this.reviewLink("", `View all ${this.totalReviews} reviews`)}
-        </div>
+        </p>
       </abu-flex>
     `;
   }
