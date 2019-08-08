@@ -1,15 +1,17 @@
+/// <reference path="../../globals.d.ts"/>
 import { LitElement, css, html, customElement } from "lit-element";
-const style = require("./layout.scss");
-
+import style from "./layout.scss";
 export class Layout extends LitElement {
-  static style = [
-    css`
-      :host {
-        display: block;
-      }
-    `,
-    style.default
-  ];
+  static get styles() {
+    return [
+      css`
+        :host {
+          display: block;
+        }
+      `,
+      style
+    ];
+  }
   render() {
     return html`
       <slot></slot>
@@ -71,13 +73,16 @@ export class Container extends Layout {
 
 @customElement("abu-flex")
 export class Flex extends Layout {
-  static styles = [
-    css`
-      :host {
-        display: flex;
-      }
-    `
-  ];
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
+        :host {
+          display: flex;
+        }
+      `
+    ];
+  }
 }
 
 /**

@@ -3,6 +3,7 @@ import { html, unsafeCSS } from "lit-element";
 import { storiesOf } from "@storybook/polymer";
 import { ifDefined } from "lit-html/directives/if-defined";
 import { classMap } from "lit-html/directives/class-map";
+import tinycolor from "tinycolor2";
 
 import { Button } from "../packages/button/src/button.ts";
 import { styleMap } from "lit-html/directives/style-map";

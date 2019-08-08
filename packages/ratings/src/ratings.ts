@@ -89,18 +89,12 @@ export class Ratings extends LitElement implements RatingProperties {
     super();
     this.deriveProperties();
   }
-  connectedCallback() {
-    super.connectedCallback();
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
   protected starIcon(filled = true) {
     return html`
       <abu-icon
         style=${styleMap({
-          verticalAlign: "middle",
-          "--icon-font-size": ".5rem"
+          verticalAlign: "middle"
+          // "--icon-font-size": "1rem"
         })}
         >${filled ? "star" : "star_border"}</abu-icon
       >

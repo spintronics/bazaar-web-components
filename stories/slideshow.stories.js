@@ -4,22 +4,32 @@ import { Slideshow } from "../packages/slideshow/src/slideshow.ts";
 import { Hero } from "../packages/layout/src/layout.ts";
 import { styleMap } from "lit-html/directives/style-map";
 import { html } from "lit-html";
+import { getRandomColor } from "./spectacle";
 
-storiesOf("slideshow", module).add("default", () => {
+storiesOf("slideshow", module).add("hero", () => {
   return html`
     <abu-slideshow>
       ${Array(7)
         .fill(0)
         .map((_, dex) => {
           return html`
+            <style>
+              -webkit-text-stroke-width: 1px;
+              -webkit-text-stroke-color: black;
+            </style>
             <abu-hero
               slot=${dex}
               style=${styleMap({
-                background: "var(--color-dark)",
-                backgroundImage: "https://picsum.photos/1200/300?" + dex
+                background: getRandomColor(),
+                backgroundImage: `url(https://picsum.photos/1200/300?${dex})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
               })}
             >
-              <h1 slot="head">I think you might really like this</h1>
+              <h1 slot="head">
+                It's about making placeholder text great again
+              </h1>
               <p>
                 Secure this area until the alert is canceled. Give me regular
                 reports. Do you know what's going on? Maybe it's another drill.

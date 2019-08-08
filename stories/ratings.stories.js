@@ -3,7 +3,6 @@ import { html } from "lit-element";
 import { storiesOf } from "@storybook/polymer";
 
 import { Ratings } from "../packages/ratings/src/ratings.ts";
-import "@material/mwc-icon";
 // import '@material/mwc-linear-progress';
 
 const review = {

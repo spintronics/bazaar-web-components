@@ -1,4 +1,4 @@
-import { LitElement, property, css, html } from 'lit-element';
+import { LitElement, property, css, html, customElement } from "lit-element";
 import {
   concat,
   sortWith,
@@ -11,27 +11,30 @@ import {
   filter,
   prop,
   ascend,
-  descend,
-} from 'ramda/es';
+  descend
+} from "ramda/es";
 
 interface Sortable {
   childObserver: MutationObserver;
 }
+@customElement("abu-sorted")
 export class Sorted extends LitElement implements Sortable {
-  @property({ type: String }) sort = 'slot:asc';
+  @property({ type: String }) sort = "slot:asc";
   @property({ type: Number }) offset = 0;
   @property({ type: Array }) order = [];
   childObserver;
-  static get style() {
-    return css`
-      :host {
-        width: 100%;
-        display: grid;
-      }
-      ::slotted(*) {
-        display: grid-item;
-      }
-    `;
+  static get styles() {
+    return [
+      css`
+        :host {
+          width: 100%;
+          display: grid;
+        }
+        ::slotted(*) {
+          display: grid-item;
+        }
+      `
+    ];
   }
   constructor() {
     super();
@@ -43,7 +46,7 @@ export class Sorted extends LitElement implements Sortable {
   connectedCallback() {
     super.connectedCallback();
     this.childObserver.observe(this, {
-      childList: true,
+      childList: true
     });
   }
   disconnectedCallback() {
@@ -75,23 +78,23 @@ export class Sorted extends LitElement implements Sortable {
       compose(
         apply(concat),
         reverse,
-        splitAt(this.offset % this.children.length),
+        splitAt(this.offset % this.children.length)
       ),
       sortWith(
         compose(
-          map(([key = '', direction = '']) => {
-            return (direction.includes('desc') ? descend : ascend)(el => {
+          map(([key = "", direction = ""]) => {
+            return (direction.includes("desc") ? descend : ascend)(el => {
               let value = el.getAttribute(key);
               let num = Number.parseInt(value);
               return num == value ? num : value;
             });
           }),
-          map(split(':')),
-          split('|'),
-        )(this.sort),
+          map(split(":")),
+          split("|")
+        )(this.sort)
       ),
-      filter(prop('slot')),
-      Array.from,
+      filter(prop("slot")),
+      Array.from
     )(this.children);
 
     return html`
@@ -99,7 +102,7 @@ export class Sorted extends LitElement implements Sortable {
         index =>
           html`
             <slot name="${index}"></slot>
-          `,
+          `
       )}
     `;
   }

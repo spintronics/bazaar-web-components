@@ -17,7 +17,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@bazaar/base": "^1.0.0",
     "@bazaar/layout": "^1.0.0",
+    "@bazaar/sorted": "^1.0.0",
     "@bazaar/styles": "^1.0.0",
     "ionic": "^5.2.3",
     "lit-element": "^2.2.1",

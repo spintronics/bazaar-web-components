@@ -6,16 +6,23 @@ import {
   html,
   customElement
 } from "lit-element";
+import "@bazaar/sorted";
+
+/**
+ * after settle re-order items and set scroll to the start
+ * to give the illusion of infinite scrolling
+ * add arrow/dots slots
+ */
 @customElement("abu-slideshow")
 export class Slideshow extends LitElement {
   @query('[action="previous"]') previousSlide;
   @query('[action="next"]') nextSlide;
+  @query(".slide-container") track;
   @property({ type: Boolean }) isScrolling = false;
   @property({ type: Number }) offset = 0;
   @property({ type: Number }) timeout = 0;
   static get styles() {
     return [
-      super.styles || css``,
       css`
         :host {
           display: block;
@@ -72,8 +79,7 @@ export class Slideshow extends LitElement {
           scrollbar-width: none;
         }
       </style>
-      <k-sorted-list
-        sort="name:asc"
+      <abu-sorted
         @scroll=${this.onScroll}
         class="slide-container"
         offset=${this.offset}
@@ -85,7 +91,13 @@ export class Slideshow extends LitElement {
               <slot name=${index} slot=${index}> </slot>
             `;
           })}
-      </k-sorted-list>
+      </abu-sorted>
     `;
+  }
+  firstUpdated() {
+    //don't ask
+    setTimeout(() => {
+      this.track.scrollLeft = 0;
+    });
   }
 }

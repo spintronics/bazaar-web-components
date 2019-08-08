@@ -1,17 +1,11 @@
 {
-  "name": "@bazaar/layout",
+  "name": "@bazaar/image",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "spintronics <kevinbrown5124@gmail.com>",
+  "homepage": "http://'",
   "license": "MIT",
-  "main": "layout.js",
-  "dependencies": {
-    "@bazaar/base": "^1.0.0",
-    "@bazaar/styles": "^1.0.0",
-    "lit-element": "^2.2.1",
-    "lit-html": "^1.1.1"
-  },
-  "homepage": "https://github.com/spintronics/bazaar-web-components#readme",
+  "main": "image.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -28,5 +22,11 @@
   },
   "bugs": {
     "url": "https://github.com/spintronics/bazaar-web-components/issues"
+  },
+  "dependencies": {
+    "@bazaar/base": "^1.0.0",
+    "decko": "^1.2.0",
+    "lit-element": "^2.2.1",
+    "lit-html": "^1.1.1"
   }
 }

@@ -16,7 +16,7 @@
     "site:build": "npm run storybook:build",
     "storybook": "start-storybook -p 8080",
     "start:build": "cd dist && es-dev-server --open",
-    "build": "node scripts/jsass; tsc --build packages/**/tsconfig.json"
+    "build": "tsc --build packages/**/tsconfig.json"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -40,6 +40,7 @@
     "prettier": "^1.18.2",
     "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
+    "tinycolor2": "^1.4.1",
     "typescript": "^3.5.3",
     "weightless": "^0.0.34"
   },

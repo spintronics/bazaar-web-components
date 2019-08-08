@@ -4,13 +4,30 @@
   "description": "> TODO: description",
   "author": "spintronics <kevinbrown5124@gmail.com>",
   "license": "MIT",
-  "main": "element.js",
+  "main": "icon.js",
   "dependencies": {
-    "@bazaar/layout": "^1.0.0",
-    "@bazaar/styles": "^1.0.0",
+    "@bazaar/base": "^1.0.0",
     "@material/button": "^3.1.0",
     "@material/mwc-icon": "^0.6.0",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.1"
+  },
+  "homepage": "https://github.com/spintronics/bazaar-web-components#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spintronics/bazaar-web-components.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/spintronics/bazaar-web-components/issues"
   }
 }

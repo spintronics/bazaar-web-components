@@ -1,25 +1,9 @@
-import { LitElement, property, css, html } from 'lit-element';
-// import style from './element.style';
-interface Elementary {
-  name: String;
-  hidden: Boolean;
-}
-export class Element extends LitElement implements Elementary {
-  @property({ type: Boolean }) hidden = false;
-  name = 'element';
-  static get style() {
-    return [css``];
-  }
-  constructor() {
-    super();
-  }
-  connectedCallback() {
-    super.connectedCallback();
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-  render() {
-    return html``;
-  }
-}
+// export * from "./deku";
+export * from "./mixer";
+export * from "./util";
+import { LitElement } from "lit-element";
+
+interface BaseElement {}
+
+//implement global base element
+export class MagicCarpet extends LitElement implements BaseElement {}

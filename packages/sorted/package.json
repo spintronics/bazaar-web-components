@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "sorted.js",
   "dependencies": {
+    "@bazaar/base": "^1.0.0",
     "@bazaar/layout": "^1.0.0",
     "@bazaar/styles": "^1.0.0",
     "ionic": "^5.2.3",

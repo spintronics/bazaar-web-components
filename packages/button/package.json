@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "button.js",
   "dependencies": {
+    "@bazaar/base": "^1.0.0",
     "@bazaar/layout": "^1.0.0",
     "@bazaar/styles": "^1.0.0",
     "@material/mwc-button": "^0.6.0",

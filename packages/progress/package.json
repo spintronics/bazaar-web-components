@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "progress.js",
   "dependencies": {
+    "@bazaar/base": "^1.0.0",
     "@bazaar/layout": "^1.0.0",
     "@bazaar/styles": "^1.0.0",
     "@material/linear-progress": "^3.1.0",
