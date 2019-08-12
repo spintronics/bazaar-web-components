@@ -21,14 +21,6 @@ module.exports = ({ config }) => {
         "css-loader",
         "sass-loader"
       ]
-    },
-    {
-      test: /\.html$/,
-      use: [
-        {
-          loader: require.resolve("polymer-webpack-loader")
-        }
-      ]
     }
   );
   config.resolve.extensions.push(

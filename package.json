@@ -44,7 +44,10 @@
     "typescript": "^3.5.3",
     "weightless": "^0.0.34"
   },
-  "name": "ui",
+  "config": {
+    "element_prefix": "abu-"
+  },
+  "name": "bazaar",
   "dependencies": {
     "ramda": "^0.26.1"
   }

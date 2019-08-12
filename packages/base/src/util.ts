@@ -4,8 +4,7 @@ export function debounce(
   immediate?: boolean
 ) {
   var timeout;
-  return function(this: any) {
-    var args = arguments;
+  return function(this: any, ...args: any[]) {
     var later = () => {
       timeout = null;
       if (!immediate) func.call(this, ...args);

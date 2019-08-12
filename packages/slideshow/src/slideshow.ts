@@ -43,6 +43,7 @@ export class Slideshow extends LitElement {
           height: 100%;
           white-space: nowrap;
         }
+
         ::slotted(*) {
           display: inline-flex;
           background-position: center;

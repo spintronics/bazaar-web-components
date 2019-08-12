@@ -6,5 +6,5 @@
     "outDir": ".",
     "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "include": ["src/*.ts", "../packages.json"]
+  "include": ["src/*.ts"]
 }

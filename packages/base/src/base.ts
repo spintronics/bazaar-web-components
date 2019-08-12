@@ -1,6 +1,7 @@
 // export * from "./deku";
 export * from "./mixer";
 export * from "./util";
+export * from "./deku";
 import { LitElement } from "lit-element";
 
 interface BaseElement {}

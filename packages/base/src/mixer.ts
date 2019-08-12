@@ -13,7 +13,7 @@ export function withIntersectionObserver({
   return <T extends Constructor<CustomElement>>(baseElement: T) => {
     return class extends baseElement {
       intersectionObserver;
-      connectedCallback(this: IntersectionWatcher) {
+      connectedCallback(this: IIntersectionObserver) {
         if (super.connectedCallback) super.connectedCallback();
         const observer = (
           entries: IntersectionObserverEntry[],
@@ -32,14 +32,14 @@ export function withIntersectionObserver({
           }
         );
       }
-      firstUpdated(this: LitElement & IntersectionWatcher) {
+      firstUpdated(this: LitElement & IIntersectionObserver) {
         for (let target of targets) {
           this.intersectionObserver.observe(
             (target && this.renderRoot.querySelector(target)) || this
           );
         }
       }
-      disconnectedCallback(this: LitElement & IntersectionWatcher) {
+      disconnectedCallback(this: LitElement & IIntersectionObserver) {
         if (super.disconnectedCallback) super.disconnectedCallback();
         for (let target of targets) {
           this.intersectionObserver.unobserve(
@@ -50,3 +50,16 @@ export function withIntersectionObserver({
     };
   };
 }
+
+// interface MediaQueryOptions
+
+// export function withMediaQuery(...queries) {
+//   return <T extends Constructor<CustomElement>>(base: T) => {
+//     return class extends base {
+//       resizeObserver = () => {};
+//       connectedCallback() {
+//         if (super.connectedCallback) super.connectedCallback();
+//       }
+//     };
+//   };
+// }

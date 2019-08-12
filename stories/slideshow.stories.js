@@ -8,6 +8,15 @@ import { getRandomColor } from "./spectacle";
 
 storiesOf("slideshow", module).add("hero", () => {
   return html`
+    <style>
+      abu-slideshow {
+        height: 100%;
+      }
+      #root,
+      #root-inner {
+        height: 100%;
+      }
+    </style>
     <abu-slideshow>
       ${Array(7)
         .fill(0)

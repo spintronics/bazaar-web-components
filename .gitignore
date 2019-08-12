@@ -9,3 +9,4 @@ packages/template
 yarn-error.log
 yarn.lock
 packages/**/node_modules/
+**/credentials.js

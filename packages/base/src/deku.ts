@@ -1,24 +1,51 @@
-// /// <reference path="../../globals.d.ts"/>
+/// <reference path="../../globals.d.ts"/>
+import { customElement } from "lit-element";
+import { Constants } from "./invariable";
+
+// From the TC39 Decorators proposal
+interface ClassDescriptor {
+  kind: "class";
+  elements: ClassElement[];
+  finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
+}
+
+// From the TC39 Decorators proposal
+interface ClassElement {
+  kind: "field" | "method";
+  key: PropertyKey;
+  placement: "static" | "prototype" | "own";
+  initializer?: Function;
+  extras?: ClassElement[];
+  finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
+  descriptor?: PropertyDescriptor;
+}
+
+export const bazaarElement = name => (
+  classOrDescriptor: ClassDescriptor | Constructor<HTMLElement>
+) => {
+  if (window.customElements.get(Constants.element_prefix + name)) {
+    return classOrDescriptor;
+  }
+  // if (typeof classOrDescriptor === "object") {
+  //   classOrDescriptor.elements.push({
+  //     kind: "field",
+  //     placement: "static",
+  //     key: "name",
+  //     descriptor: {
+  //       enumerable: false,
+  //       configurable: false,
+  //       value: Constants.element_prefix + name
+  //     }
+  //   });
+  // }
+  return customElement(Constants.element_prefix + name)(classOrDescriptor);
+  // if (typeof classOrDescriptor === "function") {
+  //   klass.name = Constants.element_prefix + name;
+  // }
+  // return klass;
+};
 
 // import { LitElement } from "lit-element";
-
-// // From the TC39 Decorators proposal
-// interface ClassDescriptor {
-//   kind: "class";
-//   elements: ClassElement[];
-//   finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
-// }
-
-// // From the TC39 Decorators proposal
-// interface ClassElement {
-//   kind: "field" | "method";
-//   key: PropertyKey;
-//   placement: "static" | "prototype" | "own";
-//   initializer?: Function;
-//   extras?: ClassElement[];
-//   finisher?: <T>(clazz: Constructor<T>) => undefined | Constructor<T>;
-//   descriptor?: PropertyDescriptor;
-// }
 
 // function standardIntersection(
 //   { root, rootMargin, threshold, targets },
@@ -27,7 +54,7 @@
 //   let { elements = [], kind = "class" } = descriptor;
 //   return {
 //     kind,
-//     initializer(this: IntersectionWatcher) {
+//     initializer(this: IIntersectionObserver) {
 //       this._intersection = function(entries, observer) {
 //         if (this.intersection) this.intersection(entries, observer);
 //       };
@@ -42,7 +69,7 @@
 //         kind: "method",
 //         placement: "prototype",
 //         descriptor: {
-//           value(this: IntersectionWatcher & LitElement) {
+//           value(this: IIntersectionObserver & LitElement) {
 //             for (let target of targets) {
 //               this.intersectionObserver.observe(
 //                 (target && this.renderRoot.querySelector(target)) || this
@@ -56,7 +83,7 @@
 //         kind: "method",
 //         placement: "prototype",
 //         descriptor: {
-//           value(this: IntersectionWatcher & LitElement) {
+//           value(this: IIntersectionObserver & LitElement) {
 //             if (super.disconnectedCallback) super.disconnectedCallback();
 //             for (let target of targets) {
 //               this.intersectionObserver.unobserve(

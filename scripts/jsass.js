@@ -12,9 +12,8 @@ let jscss = style =>
 
 (async () => {
   let styles = globby.sync(
-    path.join(__dirname, "../packages/{,!(node_modules)}**/src/*.s{a|c}ss")
+    path.join(__dirname, "../packages/*/src/*.s{a|c}ss")
   );
-  console.log("styles", styles);
   return Promise.all(
     styles.map(path =>
       new Promise((resolve, reject) => {
