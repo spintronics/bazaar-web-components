@@ -1,8 +1,22 @@
 import { bazaarElement } from "@bazaar/base";
 import { Layout } from "./base";
 import { property, html } from "lit-element";
-import { fromEvent, Subject, Subscription, Observable } from "rxjs";
-import { debounceTime, multicast, refCount, map, filter } from "rxjs/operators";
+import {
+  fromEvent,
+  Subject,
+  Subscription,
+  Observable,
+  animationFrameScheduler
+} from "rxjs";
+import {
+  // debounceTime,
+  multicast,
+  refCount,
+  map,
+  filter,
+  // debounce,
+  observeOn
+} from "rxjs/operators";
 import { styleMap } from "lit-html/directives/style-map";
 
 export type breakpoint =
@@ -20,7 +34,7 @@ export const defaultBreakpoints = {
   mobile: "0px"
 };
 
-const breakpointKeys = Object.keys(defaultBreakpoints);
+const breakpoints = Object.keys(defaultBreakpoints);
 
 interface MediaMatcher {
   key: string;
@@ -42,7 +56,7 @@ export function ResizeObservable() {
 }
 
 export const resizeObserver = ResizeObservable().pipe(
-  debounceTime(150),
+  observeOn(animationFrameScheduler),
   map(event => {
     /**
      * getting the computed breakpoint variables is somewhat expensive but variables
@@ -51,7 +65,7 @@ export const resizeObserver = ResizeObservable().pipe(
      * by safari yet.
      */
     const computed = getComputedStyle(document.body);
-    event.computedBreakpoints = breakpointKeys.reduce((acc, key) => {
+    event.computedBreakpoints = breakpoints.reduce((acc, key) => {
       acc[key] = computed.getPropertyValue("--" + key) || acc[key];
       return acc;
     }, defaultBreakpoints);
@@ -63,7 +77,7 @@ export const resizeObserver = ResizeObservable().pipe(
  * resizeEvent > debounce > getComputedBreakpoints > breakpoint / queries observe change
  */
 
-for (let key of breakpointKeys) {
+for (let key of breakpoints) {
   mediaSubjectPool[key] = resizeObserver.pipe(
     map(event => {
       return {
@@ -94,7 +108,7 @@ export class Media extends Layout {
   protected queryChanged() {}
   constructor() {
     super();
-    for (let key of breakpointKeys) {
+    for (let key of breakpoints) {
       this.subscriptions[key] = mediaSubjectPool[key]
         .pipe(
           filter(

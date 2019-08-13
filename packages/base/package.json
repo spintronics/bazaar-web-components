@@ -10,7 +10,8 @@
     "ionic": "^5.2.3",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.1",
-    "ramda": "^0.26.1"
+    "ramda": "^0.26.1",
+    "rxjs": "^6.5.2"
   },
   "config": {
     "element_prefix": "abu-"

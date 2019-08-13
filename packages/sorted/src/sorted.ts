@@ -106,4 +106,8 @@ export class Sorted extends LitElement implements Sortable {
       )}
     `;
   }
+  firstUpdated() {
+    this.scrollLeft = 0;
+    this.scrollTop = 0;
+  }
 }

@@ -17,10 +17,32 @@ import "@bazaar/sorted";
 export class Slideshow extends LitElement {
   @query('[action="previous"]') previousSlide;
   @query('[action="next"]') nextSlide;
-  @query(".slide-container") track;
-  @property({ type: Boolean }) isScrolling = false;
+  @query(".slide-track") track;
+  @query(".selector-list") selectorList;
   @property({ type: Number }) offset = 0;
-  @property({ type: Number }) timeout = 0;
+  @property({ type: Number, reflect: true }) index = 0;
+  @property({ type: Number, reflect: true }) show_selector = 0;
+  protected scrolling = false;
+  protected scrollTimeout;
+  protected get selector() {
+    let slides = this.querySelectorAll(".slide") || [];
+    return html`
+      <div class="selector-list">
+        ${Array(slides.length)
+          .fill(0)
+          .map((_, x) => {
+            return html`
+              <span
+                index=${x}
+                ?selected=${this.index === x}
+                class="selector"
+                @click=${this.goto.bind(this, x)}
+              ></span>
+            `;
+          })}
+      </div>
+    `;
+  }
   static get styles() {
     return [
       css`
@@ -33,7 +55,7 @@ export class Slideshow extends LitElement {
           height: var(--slide-height, initial);
         }
 
-        .slide-container {
+        .slide-track {
           overflow: auto;
           position: relative;
           scroll-snap-type: x mandatory;
@@ -44,7 +66,7 @@ export class Slideshow extends LitElement {
           white-space: nowrap;
         }
 
-        ::slotted(*) {
+        ::slotted(.slide) {
           display: inline-flex;
           background-position: center;
           background-size: cover;
@@ -59,31 +81,108 @@ export class Slideshow extends LitElement {
           white-space: normal;
           flex-flow: column nowrap;
         }
+
+        .selector-list {
+          position: absolute;
+          z-index: 3;
+          left: 50%;
+          bottom: 1em;
+          transform: translateX(-50%);
+        }
+
+        .selector {
+          display: inline-block;
+          height: 1em;
+          width: 1em;
+          border-radius: var(--rounded, 300px);
+          border: 2px solid white;
+          box-shadow: 0px 0px 5px 1px black;
+          margin-right: 1em;
+        }
+
+        .selector[selected] {
+          background: white;
+        }
+
+        ::slotted(:not(.slide)) {
+          position: absolute;
+          z-index: 3;
+        }
+
+        ::slotted([slot="next"]) {
+          right: 1em;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        ::slotted([slot="previous"]) {
+          left: 1em;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        ::slotted(button) {
+          background: white;
+        }
       `
     ];
   }
-  constructor() {
-    super();
-    this.offset = 0;
-    this.timeout;
-    this.isScrolling;
+  previous() {
+    this.goto(this.index - 1);
   }
-  onScroll() {}
+  next() {
+    this.goto(this.index + 1);
+  }
+  setSlide(index?) {
+    index =
+      index ||
+      Array.from(this.querySelectorAll(".slide"))
+        .map(slide => (slide as HTMLElement).offsetLeft)
+        .indexOf(this.track.scrollLeft);
+    if (index !== -1) {
+      this.selectorList
+        .querySelector("[selected]")!
+        .removeAttribute("selected");
+      this.selectorList
+        .querySelector(`[index="${index}"]`)!
+        .setAttribute("selected", "true");
+      this.index = index;
+    }
+  }
+  goto(index) {
+    if (this.scrolling) return;
+    let slides = this.querySelectorAll(".slide");
+    let slide = slides[index];
+    if (!slide) return;
+    this.setSlide(index);
+    this.track.scrollLeft = (slide as HTMLElement).offsetLeft;
+  }
+  scrollWatch() {
+    this.scrolling = true;
+    if (this.scrollTimeout) clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.scrolling = false;
+      this.setSlide();
+    }, 200);
+  }
   render() {
     return html`
       <style>
-        .slide-container::-webkit-scrollbar {
+        .slide-track::-webkit-scrollbar {
           display: none;
         }
-        .slide-container {
+        .slide-track {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
       </style>
+      <slot name="previous" @click=${this.previous.bind(this)}></slot>
+      <slot name="next" @click=${this.next.bind(this)}></slot>
+      ${this.selector}
       <abu-sorted
-        @scroll=${this.onScroll}
-        class="slide-container"
+        class="slide-track"
         offset=${this.offset}
+        @scroll=${this.scrollWatch.bind(this)}
       >
         ${Array(this.children.length)
           .fill(0)
@@ -94,11 +193,5 @@ export class Slideshow extends LitElement {
           })}
       </abu-sorted>
     `;
-  }
-  firstUpdated() {
-    //don't ask
-    setTimeout(() => {
-      this.track.scrollLeft = 0;
-    });
   }
 }

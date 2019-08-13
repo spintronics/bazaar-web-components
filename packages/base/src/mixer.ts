@@ -3,6 +3,22 @@
 import { LitElement } from "lit-element";
 import { debounce } from "./util";
 
+// export interface IntentObserver {
+//   sources: Observer[],
+
+// }
+
+// type SinkPool = {[key in symbol]: Sink}
+
+// export const intentObserver = ((sinks: SinkPool) => {
+
+//   return function intentObserver({
+//     sources = []
+//   }) {
+//     sources
+//   }
+// })()
+
 export function withIntersectionObserver({
   root = null,
   targets = [null],

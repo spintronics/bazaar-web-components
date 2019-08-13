@@ -6,6 +6,8 @@ import { styleMap } from "lit-html/directives/style-map";
 import { html } from "lit-html";
 import { getRandomColor } from "./spectacle";
 
+import { Icon } from "../packages/icon/src/icon.ts";
+
 storiesOf("slideshow", module).add("hero", () => {
   return html`
     <style>
@@ -28,6 +30,7 @@ storiesOf("slideshow", module).add("hero", () => {
             </style>
             <abu-hero
               slot=${dex}
+              class="slide"
               style=${styleMap({
                 background: getRandomColor(),
                 backgroundImage: `url(https://picsum.photos/1200/300?${dex})`,
@@ -47,6 +50,8 @@ storiesOf("slideshow", module).add("hero", () => {
             </abu-hero>
           `;
         })}
+      <button slot="next">next</button>
+      <button slot="previous">previous</button>
     </abu-slideshow>
   `;
 });

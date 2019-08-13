@@ -2,33 +2,29 @@
 
 A growing collection of commerce focused web-components to help you build a better shop.
 
-## Goals
+## Wishlist
 
-- storybook integration and testing
-- accessibility
-- internationalization
-- customizable
-- decoupled interface
-- responds to observable state changes
-- performant
+- ~~media matcher~~
+- slideshow controls
+- modal
+- tooltip & badging
+- product card
+- product compare
+- cart overview
+- map markers / search actions
+- skeleton preload
+- combo search
+- parralax trigger
 - touch/swipe enabled
 - dynamic skeleton loading
 - animated entry / Intersection behaviors
-- register with open-wc and npm
-
-## Wishlist
-
-- media matcher
 - animation container
-- parralax trigger
-- product card
-- badging
-- combo search
 - drawer
 - grid layout
-- action interface
+- intent observer
 - state mapper
-- modal
+- internationalization
+- accesibility
 - toast
 
 ## Journey
