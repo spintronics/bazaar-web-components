@@ -1,10 +1,11 @@
-// export * from "./deku";
 export * from "./mixer";
 export * from "./util";
 export * from "./deku";
-import { LitElement } from "lit-element";
+// import { LitElement } from "lit-element";
 
-interface BaseElement {}
+// interface BaseElement {}
 
 //implement global base element
-export class MagicCarpet extends LitElement implements BaseElement {}
+// export class Bazaar extends LitElement {
+
+// }

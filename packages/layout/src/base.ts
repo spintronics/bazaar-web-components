@@ -1,8 +1,7 @@
 import { html } from "lit-html";
-import { css, LitElement } from "lit-element";
-import { bazaarElement } from "@bazaar/base";
+import { css, LitElement, customElement } from "lit-element";
 
-@bazaarElement("layout")
+@customElement("neo-layout")
 export class Layout extends LitElement {
   static get styles() {
     return [

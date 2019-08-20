@@ -1,4 +1,4 @@
-import { customElement, css, LitElement, html } from "lit-element";
+import { customElement, css, LitElement, html, property } from "lit-element";
 // import style from './element.style';
 import { style as material } from "@material/mwc-icon/mwc-icon-host-css";
 // import { layout } from '@bazaar/layout';
@@ -9,11 +9,22 @@ export enum IconFamilies {
   awesome = "https://kit.fontawesome.com/f068e4a895.js"
 }
 
-export function injectIconFont(type: IconFamilies) {
+const loaded = {
+  material: false
+};
+
+export function injectIconFont(type, callback = () => {}) {
+  if (loaded[type]) return callback();
   const fontEl = document.createElement("link");
   fontEl.id = name;
   fontEl.rel = "stylesheet";
   fontEl.href = IconFamilies[type];
+  fontEl.setAttribute("async", "true");
+  fontEl.onload = () => {
+    loaded[type] = true;
+    callback();
+  };
+  (loaded as any).material = fontEl.onload;
   document.head!.appendChild(fontEl);
 }
 
@@ -28,13 +39,12 @@ export function injectIconFont(type: IconFamilies) {
  * by utilizing an intersection observer.
  */
 
-@customElement("abu-icon")
+@customElement("neo-icon")
 export class Icon extends LitElement {
-  static family = "material";
+  @property({ type: String }) family = "material";
   constructor() {
     super();
-    // bring this yourself so these load faster
-    // injectIconFont((this.constructor as any).family);
+    injectIconFont(this.family, this.requestUpdate.bind(this));
   }
   static get styles() {
     return [
@@ -43,6 +53,7 @@ export class Icon extends LitElement {
         :host(:not(.fas)) {
           font-family: var(--icon-font, "Material Icons");
           font-size: var(--icon-font-size, inherit);
+          font-display: block;
         }
         :host(.ios) {
         }
@@ -51,13 +62,17 @@ export class Icon extends LitElement {
   }
   render() {
     return html`
-      <slot></slot>
+      ${loaded[this.family]
+        ? html`
+            <slot></slot>
+          `
+        : ""}
     `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "abu-icon": Icon;
+    "neo-icon": Icon;
   }
 }

@@ -1,0 +1,13 @@
+$modal-z: var(--modal-z, 40);
+$modal-background-color: var(--modal-background-color, rgba(black, 0.86));
+$modal-content-width: var(--modal-content-width, 640px);
+
+.modal {
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: fixed;
+  z-index: $modal-z;
+}

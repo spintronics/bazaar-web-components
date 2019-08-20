@@ -1,32 +1,41 @@
 /// <reference path="../../globals.d.ts" />
-/// <reference path="../node_modules/@types/googlemaps/index.d.ts" />
+/// <reference types="googlemaps" />
 
-// import { bazaarElement } from "@bazaar/base";
-import { LitElement, property, customElement } from "lit-element";
+import {
+  LitElement,
+  property,
+  // customElement,
+  query,
+  html,
+  css,
+  customElement
+} from "lit-element";
 
-/**
- * TODO:
- * implement search actions / markers (fit-map) / pop-over
- */
-
-@customElement("abu-map")
-export class Map extends LitElement {
-  private static initialized = false;
-  private map;
-  static style = {
-    display: "block",
-    height: "100%",
-    width: "100%",
-    margin: "0 auto"
-  };
-  constructor() {
-    super();
-    for (let [key, value] of Object.entries(Map.style)) {
-      this.style.setProperty(key, value);
+@customElement("neo-map")
+export class NiceMap extends LitElement {
+  protected static initialized = false;
+  protected map;
+  protected _markers: { [key: string]: google.maps.Marker } = {};
+  @query("#map") mapElement;
+  @property({ type: String }) googleApiKey = "";
+  @property({ type: Number }) lat = 0;
+  @property({ type: Number }) lng = 0;
+  @property({ type: Array }) markers: google.maps.MarkerOptions[] = [];
+  @property({ type: Number }) zoom = 0;
+  @property({ type: Boolean }) persistMarkers = true;
+  static styles = css`
+    #map {
+      display: block;
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
     }
-  }
-  createRenderRoot() {
-    return this;
+  `;
+
+  render() {
+    return html`
+      <div id="map"></div>
+    `;
   }
   static initialize({ googleApiKey = "" }) {
     if (this.initialized) return Promise.resolve();
@@ -47,16 +56,33 @@ export class Map extends LitElement {
     });
   }
 
-  @property({ type: String }) googleApiKey = "";
-  @property({ type: Number }) lat = 0;
-  @property({ type: Number }) lng = 0;
-  @property({ type: Number }) zoom = 0;
+  updated(_) {
+    if (!this.persistMarkers) {
+      for (let [key, marker] of Object.entries(this._markers)) {
+        marker.setMap(null);
+        delete this._markers[key];
+      }
+    }
+    if (this.map) {
+      this.markers.forEach(marker => {
+        let id =
+          marker.title ||
+          (marker.position && "" + marker.position.lat + marker.position.lng);
+        if (id && !this._markers[id]) {
+          this._markers[id] = new google.maps.Marker({
+            map: this.map,
+            ...marker
+          });
+        }
+      });
+    }
+  }
 
-  connectedCallback() {
+  firstUpdated() {
     let { lat, lng, zoom, googleApiKey } = this;
-    Map.initialize({ googleApiKey })
+    NiceMap.initialize({ googleApiKey })
       .then(() => {
-        this.map = new google.maps.Map(this, {
+        this.map = new google.maps.Map(this.mapElement, {
           center: {
             lat,
             lng
@@ -66,20 +92,22 @@ export class Map extends LitElement {
         this.dispatchEvent(
           new CustomEvent("map--google:ready", { detail: this.map })
         );
+        this.requestUpdate();
       })
       .catch(error => console.warn("issue loading maps: ", error));
   }
-  //   private _centerMap() {
-  //     try {
-  //       if (this.map) {
-  //         let { lat, lng } = this;
-  //         this.map.setCenter({
-  //           lat,
-  //           lng
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.warn(error);
-  //     }
-  //   }
+
+  protected centerMap() {
+    try {
+      if (this.map) {
+        let { lat, lng } = this;
+        this.map.setCenter({
+          lat,
+          lng
+        });
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  }
 }

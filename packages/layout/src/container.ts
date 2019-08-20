@@ -1,5 +1,4 @@
-import { bazaarElement } from "@bazaar/base";
-import { css } from "lit-element";
+import { css, customElement } from "lit-element";
 import { Media } from "./media";
 
 /**
@@ -7,7 +6,7 @@ import { Media } from "./media";
  * @cssvar color
  */
 
-@bazaarElement("container")
+@customElement("neo-container")
 export class Container extends Media {
   static get styles() {
     return [

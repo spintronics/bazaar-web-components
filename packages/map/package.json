@@ -30,5 +30,8 @@
   },
   "devDependencies": {
     "@types/googlemaps": "^3.37.3"
+  },
+  "config": {
+    "element_prefix": "neo-"
   }
 }

@@ -22,5 +22,8 @@
   },
   "bugs": {
     "url": "https://github.com/spintronics/bazaar-web-components/issues"
+  },
+  "dependencies": {
+    "lit-element": "^2.2.1"
   }
 }

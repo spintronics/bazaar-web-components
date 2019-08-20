@@ -13,7 +13,7 @@ import "@bazaar/sorted";
  * to give the illusion of infinite scrolling
  * add arrow/dots slots
  */
-@customElement("abu-slideshow")
+@customElement("neo-slideshow")
 export class Slideshow extends LitElement {
   @query('[action="previous"]') previousSlide;
   @query('[action="next"]') nextSlide;
@@ -107,22 +107,21 @@ export class Slideshow extends LitElement {
         ::slotted(:not(.slide)) {
           position: absolute;
           z-index: 3;
+          color: white;
+          text-shadow: 0 0 5px black;
+          font-size: 5em;
         }
 
         ::slotted([slot="next"]) {
-          right: 1em;
+          right: 0;
           top: 50%;
           transform: translateY(-50%);
         }
 
         ::slotted([slot="previous"]) {
-          left: 1em;
+          left: 0;
           top: 50%;
           transform: translateY(-50%);
-        }
-
-        ::slotted(button) {
-          background: white;
         }
       `
     ];
@@ -179,7 +178,7 @@ export class Slideshow extends LitElement {
       <slot name="previous" @click=${this.previous.bind(this)}></slot>
       <slot name="next" @click=${this.next.bind(this)}></slot>
       ${this.selector}
-      <abu-sorted
+      <neo-sorted
         class="slide-track"
         offset=${this.offset}
         @scroll=${this.scrollWatch.bind(this)}
@@ -191,7 +190,7 @@ export class Slideshow extends LitElement {
               <slot name=${index} slot=${index}> </slot>
             `;
           })}
-      </abu-sorted>
+      </neo-sorted>
     `;
   }
 }

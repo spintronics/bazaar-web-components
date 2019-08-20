@@ -20,7 +20,7 @@ interface IImage {
  * implement srcset / sizes
  */
 
-@customElement("abu-image")
+@customElement("neo-image")
 export class Image
   extends compose(
     withIntersectionObserver({
@@ -30,9 +30,8 @@ export class Image
   )(LitElement)
   implements IImage {
   static styles = [style];
-  private _src = "";
-  //   private resizeObserver;
-  private loaded = false;
+  protected _src = "";
+  protected loaded = false;
   @property({ type: Boolean }) lazy = false;
   @property({ type: String }) src = "";
   @property({ type: String }) alt = "";
@@ -82,6 +81,6 @@ export class Image
 
 declare global {
   interface HTMLElementTagNameMap {
-    "abu-image": Image;
+    "neo-image": Image;
   }
 }

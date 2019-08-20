@@ -36,7 +36,7 @@ interface RatingProperties {
  * @action view-specific
  */
 
-@customElement("abu-ratings")
+@customElement("neo-ratings")
 export class Ratings extends LitElement implements RatingProperties {
   @property({ type: Boolean }) hidden = false;
   @property({ type: Array }) reviews = [];
@@ -91,18 +91,18 @@ export class Ratings extends LitElement implements RatingProperties {
   }
   protected starIcon(filled = true) {
     return html`
-      <abu-icon
+      <neo-icon
         style=${styleMap({
           verticalAlign: "middle"
           // "--icon-font-size": "1rem"
         })}
-        >${filled ? "star" : "star_border"}</abu-icon
+        >${filled ? "star" : "star_border"}</neo-icon
       >
     `;
   }
   protected percentageIndicator(value = 0) {
     return html`
-      <abu-progress determinate progress=${value} buffer="1"></abu-progress>
+      <neo-progress determinate progress=${value} buffer="1"></neo-progress>
     `;
   }
   protected reviewLink(
@@ -124,31 +124,29 @@ export class Ratings extends LitElement implements RatingProperties {
         Overall rating ${this.starIcon()} ${this.average.toFixed(1)}
       </h3>
       <h4>Based on ${this.reviews.length} reviews</h4>
-      <abu-flex
-        style=${styleMap({ flexFlow: "row wrap", display: "inline-flex" })}
-      >
+      <div>
         ${[5, 4, 3, 2, 1].map((count, _) => {
           let group = this.groupedReviews.get(count) || [];
           return html`
-            <abu-row style=${styleMap({ "--column-gap": "16px" })}>
-              <abu-flex style=${styleMap(shrink)}>
+            <neo-row style=${styleMap({ "--column-gap": "16px" })}>
+              <neo-flex style=${styleMap(shrink)}>
                 ${fiveStar.map((_, dex) => this.starIcon(dex < count))}
-              </abu-flex>
-              <abu-flex style=${styleMap({ alignItems: "center" })}>
+              </neo-flex>
+              <neo-flex style=${styleMap({ alignItems: "center" })}>
                 ${this.percentageIndicator(
                   this.totals[count] / this.totalReviews
                 )}
-              </abu-flex>
-              <abu-flex style=${styleMap(shrink)}>
+              </neo-flex>
+              <neo-flex style=${styleMap(shrink)}>
                 (${this.reviewLink(1, group.length)})
-              </abu-flex>
-            </abu-row>
+              </neo-flex>
+            </neo-row>
           `;
         })}
         <p>
           ${this.reviewLink("", `View all ${this.totalReviews} reviews`)}
         </p>
-      </abu-flex>
+      </div>
     `;
   }
 }

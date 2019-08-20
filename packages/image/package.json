@@ -30,6 +30,6 @@
     "lit-html": "^1.1.1"
   },
   "config": {
-    "element_prefix": "abu-"
+    "element_prefix": "neo-"
   }
 }

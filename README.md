@@ -5,7 +5,7 @@ A growing collection of commerce focused web-components to help you build a bett
 ## Wishlist
 
 - ~~media matcher~~
-- slideshow controls
+- ~~slideshow controls~~
 - modal
 - tooltip & badging
 - product card

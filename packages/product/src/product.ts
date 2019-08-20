@@ -1,12 +1,16 @@
-// import { Product as ProductType } from 'schema-dts';
-import { LitElement, property, css, html } from 'lit-element';
+import { LitElement, property, css, html, customElement } from "lit-element";
+import { Product as ProductSchema, AggregateRating } from "schema-dts";
+import "@bazaar/image";
+import "@bazaar/icon";
 // import { elementName } from '../../element-helpers';
 // import { memoize } from 'decko';
 // import { windowIsDefined } from '../../../scripts/lib';
 // import { withConnection } from 'mixins/';
+@customElement("neo-product")
 export class Product extends LitElement {
-  @property({ type: String }) productID = '';
-  @property({ type: Boolean }) loading = false;
+  @property({ type: Object }) model: ProductSchema = {
+    "@type": "Product"
+  };
   static get styles() {
     return [
       super.styles || css``,
@@ -14,12 +18,29 @@ export class Product extends LitElement {
         :host(.layout--compact) {
           --gap: 0.75rem;
         }
-      `,
+        .image {
+          max-height: 300px;
+        }
+      `
     ];
   }
   render() {
     return html`
-      ${this.productID}
+      <figure class="image">
+        <neo-image src=${this.model.image} lazy></neo-image>
+      </figure>
+      <strong>${this.model.name}</strong>
+      <div class="rating">
+        ${/*this.model.aggregateRating
+          ? Array(5)
+              .fill(0)
+              .map((_, x) => {
+                return (
+                  (<AggregateRating>this.model.aggregateRating).ratingValue >= x
+                );
+              })
+          : */ ""}
+      </div>
     `;
   }
 }

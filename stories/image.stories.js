@@ -9,7 +9,7 @@ import { styleMap } from "lit-html/directives/style-map";
 import { unsafeHTML } from "lit-html/directives/unsafe-html";
 import { randomString } from "./spectacle";
 
-// const hotName = "abu-image-" + randomString();
+// const hotName = "neo-image-" + randomString();
 
 // customElements.define(hotName, class extends Image {});
 
@@ -29,11 +29,11 @@ storiesOf("image", module)
         }
       </style>
       <div class="container">
-        <abu-image
+        <neo-image
           ?fullwidth=${fullwidth}
           ?rounded=${rounded}
           src="https://picsum.photos/500/300"
-        ></abu-image>
+        ></neo-image>
       </div>
     `;
   })
@@ -46,7 +46,7 @@ storiesOf("image", module)
           .fill(0)
           .map((_, x) => {
             return html`
-              <abu-image
+              <neo-image
                 ?fullwidth=${fullwidth}
                 ?rounded=${rounded}
                 src="https://picsum.photos/500/300?${x}"
@@ -58,7 +58,7 @@ storiesOf("image", module)
                   src="https://via.placeholder.com/500/300"
                   style="width: 500px;"
                 />
-              </abu-image>
+              </neo-image>
             `;
           })}
       </div>

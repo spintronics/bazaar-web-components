@@ -1,6 +1,5 @@
-import { bazaarElement } from "@bazaar/base";
 import { Layout } from "./base";
-import { css } from "lit-element";
+import { css, customElement } from "lit-element";
 
 enum SectionSizes {
   small,
@@ -12,7 +11,7 @@ enum SectionSizes {
  * @cssvar
  */
 
-@bazaarElement("section")
+@customElement("neo-section")
 export class Section extends Layout {
   static sizes = SectionSizes;
   static get styles() {

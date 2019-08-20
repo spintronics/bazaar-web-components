@@ -11,7 +11,7 @@ import style from "./button.scss";
  * document
  */
 
-@customElement("abu-material-button")
+@customElement("neo-material-button")
 export class Button extends MaterialButton {
   static get styles() {
     return css`
@@ -23,6 +23,6 @@ export class Button extends MaterialButton {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "abu-material-button": Button;
+    "neo-material-button": Button;
   }
 }

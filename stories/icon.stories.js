@@ -19,41 +19,41 @@ storiesOf("icon", module)
   .add("material", () => {
     return html`
       <style>
-        abu-icon {
+        neo-icon {
           color: ${color("color", getRandomColor())};
           font-size: ${text("size", "24px")};
         }
       </style>
-      <abu-icon>account_circle</abu-icon>
-      <abu-icon>search</abu-icon>
-      <abu-icon>shopping_cart</abu-icon>
-      <abu-icon>check</abu-icon>
-      <abu-icon>menu</abu-icon>
-      <abu-icon>close</abu-icon>
-      <abu-icon>expand_more</abu-icon>
-      <abu-icon>help</abu-icon>
-      <abu-icon>add_circle</abu-icon>
-      <abu-icon>share</abu-icon>
+      <neo-icon>account_circle</neo-icon>
+      <neo-icon>search</neo-icon>
+      <neo-icon>shopping_cart</neo-icon>
+      <neo-icon>check</neo-icon>
+      <neo-icon>menu</neo-icon>
+      <neo-icon>close</neo-icon>
+      <neo-icon>expand_more</neo-icon>
+      <neo-icon>help</neo-icon>
+      <neo-icon>add_circle</neo-icon>
+      <neo-icon>share</neo-icon>
     `;
   })
   .add("font awesome", () => {
     return html`
       <style>
-        abu-icon {
+        neo-icon {
           color: ${color("color", getRandomColor())};
           font-size: ${text("size", "24px")};
         }
       </style>
-      <abu-icon class="fas fa-user-circle"></abu-icon>
-      <abu-icon class="fas fa-search"></abu-icon>
-      <abu-icon class="fas fa-shopping-cart"></abu-icon>
-      <abu-icon class="fas fa-check"></abu-icon>
-      <abu-icon class="fas fa-bars"></abu-icon>
-      <abu-icon class="fas fa-times"></abu-icon>
-      <abu-icon class="fas fa-chevron-up"></abu-icon>
-      <abu-icon class="fas fa-info-circle"></abu-icon>
-      <abu-icon class="fas fa-plus-circle"></abu-icon>
-      <abu-icon class="fas fa-share"></abu-icon>
+      <neo-icon class="fas fa-user-circle"></neo-icon>
+      <neo-icon class="fas fa-search"></neo-icon>
+      <neo-icon class="fas fa-shopping-cart"></neo-icon>
+      <neo-icon class="fas fa-check"></neo-icon>
+      <neo-icon class="fas fa-bars"></neo-icon>
+      <neo-icon class="fas fa-times"></neo-icon>
+      <neo-icon class="fas fa-chevron-up"></neo-icon>
+      <neo-icon class="fas fa-info-circle"></neo-icon>
+      <neo-icon class="fas fa-plus-circle"></neo-icon>
+      <neo-icon class="fas fa-share"></neo-icon>
     `;
   })
   .add("ion", () => {
@@ -66,12 +66,12 @@ storiesOf("icon", module)
     return html`
       <script src=${IconFamilies.ionic}></script>
       <style>
-        abu-icon {
+        neo-icon {
           color: ${color("color", getRandomColor())};
           font-size: ${text("size", "24px")};
         }
       </style>
-      <abu-icon class=${icon("contact")}></abu-icon>
-      <abu-icon class=${icon("")}></abu-icon>
+      <neo-icon class=${icon("contact")}></neo-icon>
+      <neo-icon class=${icon("")}></neo-icon>
     `;
   });

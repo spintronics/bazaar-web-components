@@ -22,36 +22,36 @@ storiesOf("progress", module)
     };
 
     return html`
-      <abu-section style=${styleMap(progressStyle)}>
-        <abu-progress></abu-progress>
-      </abu-section>
-      <abu-section>
-        <abu-progress style=${styleMap(progressStyle)} reverse></abu-progress>
-      </abu-section>
-      <abu-section>
-        <abu-progress
+      <neo-section style=${styleMap(progressStyle)}>
+        <neo-progress></neo-progress>
+      </neo-section>
+      <neo-section>
+        <neo-progress style=${styleMap(progressStyle)} reverse></neo-progress>
+      </neo-section>
+      <neo-section>
+        <neo-progress
           style=${styleMap(progressStyle)}
           determinate
           buffer="1"
           progress=${progress}
-        ></abu-progress>
-      </abu-section>
-      <abu-section>
-        <abu-progress
+        ></neo-progress>
+      </neo-section>
+      <neo-section>
+        <neo-progress
           style=${styleMap(progressStyle)}
           determinate
           buffer="0.7"
           progress=${progress}
-        ></abu-progress>
-      </abu-section>
-      <abu-section>
-        <abu-progress
+        ></neo-progress>
+      </neo-section>
+      <neo-section>
+        <neo-progress
           style=${styleMap(progressStyle)}
           determinate
           buffer="0.7"
           reverse
           progress=${progress}
-        ></abu-progress>
-      </abu-section>
+        ></neo-progress>
+      </neo-section>
     `;
   });

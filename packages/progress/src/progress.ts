@@ -7,7 +7,7 @@ import { LinearProgress } from "@material/mwc-linear-progress";
  * @cssvar progress-buffer-color
  * @cssvar progress-primary-color
  */
-@customElement("abu-progress")
+@customElement("neo-progress")
 export class Progress extends LinearProgress {
   static get styles() {
     return css`

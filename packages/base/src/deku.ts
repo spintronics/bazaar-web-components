@@ -1,6 +1,8 @@
 /// <reference path="../../globals.d.ts"/>
 import { customElement } from "lit-element";
-import { Constants } from "./invariable";
+import pkg from "../package.json";
+// import { Observable } from "rxjs";
+// import { path } from "ramda/es";
 
 // From the TC39 Decorators proposal
 interface ClassDescriptor {
@@ -20,12 +22,32 @@ interface ClassElement {
   descriptor?: PropertyDescriptor;
 }
 
+// export const schema = _ => (
+//   classOrDescriptor: ClassDescriptor | Constructor<HTMLElement>
+// ) => {
+//   if (typeof classOrDescriptor === "function") {
+//     return class extends classOrDescriptor {
+//       model: any;
+//       constructor() {
+//         super();
+//         let model = document.getElementById("schema");
+//         if (model) this.model = model;
+//       }
+//     };
+//   } else {
+//     ///
+//     return classOrDescriptor;
+//   }
+// };
+
 export const bazaarElement = name => (
   classOrDescriptor: ClassDescriptor | Constructor<HTMLElement>
 ) => {
-  if (window.customElements.get(Constants.element_prefix + name)) {
+  console.log(pkg.config.element_prefix);
+  if (!window.customElements.get(pkg.config.element_prefix + name)) {
     return classOrDescriptor;
   }
+
   // if (typeof classOrDescriptor === "object") {
   //   classOrDescriptor.elements.push({
   //     kind: "field",
@@ -38,7 +60,7 @@ export const bazaarElement = name => (
   //     }
   //   });
   // }
-  return customElement(Constants.element_prefix + name)(classOrDescriptor);
+  return customElement(pkg.config.element_prefix + name)(classOrDescriptor);
   // if (typeof classOrDescriptor === "function") {
   //   klass.name = Constants.element_prefix + name;
   // }

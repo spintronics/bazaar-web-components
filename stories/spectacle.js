@@ -28,3 +28,16 @@ export function randomString() {
     .toString(36)
     .substring(7);
 }
+
+export function injectSchema(json = "") {
+  debugger;
+  let schema = document.getElementById("schema");
+  if (schema) schema.innerText = json;
+  else {
+    schema = document.createElement("script");
+    schema.type = "application/ld+json";
+    schema.id = "schema";
+    schema.innerText = json;
+    document.head.appendChild(schema);
+  }
+}

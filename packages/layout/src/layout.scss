@@ -1,40 +1,4 @@
-$container-offset: calc(2 * var(--gap));
-:host(.section) {
-  --section-padding: 3rem 1.5rem;
-  --section-padding-medium: 9rem 1.5rem;
-  --section-padding-large: 18rem 1.5rem;
-  padding: var(--section-padding);
-  display: flex;
-  @media screen and (min-width: var(--desktop, 1024px)) {
-    &.is-medium {
-      padding: var(--section-padding-medium);
-    }
-    &.is-large {
-      padding: var(--section-padding-large);
-    }
-  }
-}
-:host(.hero) {
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  --background-color: white;
-  --color: black;
-  ::slotted(*) {
-    flex-grow: 1;
-    flex-shrink: 0;
-    padding: 3rem 1.5rem;
-  }
-  ::slotted([slot="head"]) {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-  ::slotted([slot="foot"]) {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-}
+
 :host(.container) {
   flex-grow: 1;
   margin: 0 auto;

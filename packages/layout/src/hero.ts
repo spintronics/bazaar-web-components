@@ -1,14 +1,13 @@
-import { bazaarElement } from "@bazaar/base";
 import { Layout } from "./base";
 import { html } from "lit-html";
-import { css } from "lit-element";
+import { css, customElement } from "lit-element";
 
 /**
  * @cssvar background-color
  * @cssvar color
  */
 
-@bazaarElement("hero")
+@customElement("neo-hero")
 export class Hero extends Layout {
   static get styles() {
     return [

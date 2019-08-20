@@ -38,12 +38,12 @@ storiesOf("ratings", module)
   .add(
     "overview",
     () => html`
-      <abu-ratings
+      <neo-ratings
         productID=${fixture.productID}
         .totals=${fixture.reviewTotals}
         .reviews=${fixture.reviews}
         average=${2.5}
         style="width: 500px;"
-      ></abu-ratings>
+      ></neo-ratings>
     `
   );

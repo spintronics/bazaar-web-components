@@ -1,6 +1,5 @@
-import { bazaarElement } from "@bazaar/base";
 import { Layout } from "./base";
-import { property, html } from "lit-element";
+import { property, html, customElement } from "lit-element";
 import {
   fromEvent,
   Subject,
@@ -17,7 +16,7 @@ import {
   // debounce,
   observeOn
 } from "rxjs/operators";
-import { styleMap } from "lit-html/directives/style-map";
+// import { styleMap } from "lit-html/directives/style-map";
 
 export type breakpoint =
   | "fullhd"
@@ -93,7 +92,7 @@ for (let key of breakpoints) {
   );
 }
 
-@bazaarElement("media")
+@customElement("neo-media")
 export class Media extends Layout {
   @property({ type: String }) query = "";
   @property({ type: Boolean, reflect: true }) mobile = false;
@@ -103,8 +102,8 @@ export class Media extends Layout {
   @property({ type: Boolean, reflect: true }) fullhd = false;
   @property({ type: Boolean, reflect: true }) matches;
   @property({ type: Boolean, reflect: true }) autoHide = false;
-  private subscriptions: { [key: string]: Subscription } = {};
-  private symbol = Symbol();
+  protected subscriptions: { [key: string]: Subscription } = {};
+  protected symbol = Symbol();
   protected queryChanged() {}
   constructor() {
     super();
@@ -186,12 +185,7 @@ export class Media extends Layout {
   }
   render() {
     return html`
-      <slot
-        style=${styleMap({
-          display:
-            (this.query && this.matches) || !this.autoHide ? "block" : "none"
-        })}
-      ></slot>
+      <slot></slot>
     `;
   }
 }

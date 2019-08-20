@@ -11,7 +11,7 @@ import { Icon } from "../packages/icon/src/icon.ts";
 storiesOf("slideshow", module).add("hero", () => {
   return html`
     <style>
-      abu-slideshow {
+      neo-slideshow {
         height: 100%;
       }
       #root,
@@ -19,7 +19,7 @@ storiesOf("slideshow", module).add("hero", () => {
         height: 100%;
       }
     </style>
-    <abu-slideshow>
+    <neo-slideshow>
       ${Array(7)
         .fill(0)
         .map((_, dex) => {
@@ -27,8 +27,9 @@ storiesOf("slideshow", module).add("hero", () => {
             <style>
               -webkit-text-stroke-width: 1px;
               -webkit-text-stroke-color: black;
+              --icon-font-size: 5em;
             </style>
-            <abu-hero
+            <neo-hero
               slot=${dex}
               class="slide"
               style=${styleMap({
@@ -47,11 +48,11 @@ storiesOf("slideshow", module).add("hero", () => {
                 reports. Do you know what's going on? Maybe it's another drill.
                 What was that? Oh, it's nothing. Don't worry about it.
               </p>
-            </abu-hero>
+            </neo-hero>
           `;
         })}
-      <button slot="next">next</button>
-      <button slot="previous">previous</button>
-    </abu-slideshow>
+      <neo-icon slot="next">chevron_right</neo-icon>
+      <neo-icon slot="previous">chevron_left</neo-icon>
+    </neo-slideshow>
   `;
 });

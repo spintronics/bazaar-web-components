@@ -3,17 +3,17 @@ import { html, fixture, expect } from '@open-wc/testing';
 import { Sorted } from '../packages/sorted/sorted';
 import { nextAnimationFrame } from './sutra';
 
-window.customElements.define('abu-sorted', Sorted);
+window.customElements.define('neo-sorted', Sorted);
 
 let getSorted = _ =>
   fixture(html`
-    <abu-sorted>
+    <neo-sorted>
       <div slot="0" category="a">0</div>
       <div slot="1" category="b">1</div>
       <div slot="2" category="a">2</div>
       <div slot="3" category="b">3</div>
       <div slot="4" category="a">4</div>
-    </abu-sorted>
+    </neo-sorted>
   `);
 
 let sorted = getSorted();

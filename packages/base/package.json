@@ -14,6 +14,6 @@
     "rxjs": "^6.5.2"
   },
   "config": {
-    "element_prefix": "abu-"
+    "element_prefix": "neo-"
   }
 }

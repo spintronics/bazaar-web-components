@@ -31,6 +31,6 @@
     "url": "https://github.com/spintronics/bazaar-web-components/issues"
   },
   "config": {
-    "element_prefix": "abu-"
+    "element_prefix": "neo-"
   }
 }

@@ -15,7 +15,36 @@ window.googleMapsLoaded.then(_ => {
             height: 100%;
           }
         </style>
-        <abu-map googleApiKey=${maps} lat="30" lng="-100" zoom="2"> </abu-map>
+        <neo-map
+          googleApiKey=${maps}
+          lat="30.250102"
+          lng="-97.7522387"
+          zoom="14"
+          markers=${JSON.stringify([
+            {
+              position: {
+                lat: 30.25,
+                lng: -97.75
+              },
+              title: "a"
+            },
+            {
+              position: {
+                lat: 30.24,
+                lng: -97.74
+              },
+              title: "b"
+            },
+            {
+              position: {
+                lat: 30.26,
+                lng: -97.76
+              },
+              title: "c"
+            }
+          ])}
+        >
+        </neo-map>
       `;
     });
 });

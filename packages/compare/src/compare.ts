@@ -1,7 +1,3 @@
-'use strict';
+// export class Compare extends LitElement {
 
-module.exports = compare;
-
-function compare() {
-    // TODO
-}
+// }

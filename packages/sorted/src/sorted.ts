@@ -17,7 +17,7 @@ import {
 interface Sortable {
   childObserver: MutationObserver;
 }
-@customElement("abu-sorted")
+@customElement("neo-sorted")
 export class Sorted extends LitElement implements Sortable {
   @property({ type: String }) sort = "slot:asc";
   @property({ type: Number }) offset = 0;

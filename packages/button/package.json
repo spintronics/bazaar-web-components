@@ -18,6 +18,6 @@
     "ramda": "^0.26.1"
   },
   "config": {
-    "element_prefix": "abu-"
+    "element_prefix": "neo-"
   }
 }
