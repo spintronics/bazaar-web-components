@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@bazaar/base": "^1.0.0",
+    "@bazaar/button": "^1.0.0",
     "@bazaar/icon": "^1.0.0",
     "@bazaar/image": "^1.0.0",
     "@bazaar/layout": "^1.0.0",

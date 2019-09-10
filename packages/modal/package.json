@@ -24,6 +24,12 @@
     "url": "https://github.com/spintronics/bazaar-web-components/issues"
   },
   "dependencies": {
-    "lit-element": "^2.2.1"
+    "@bazaar/base": "^1.0.0",
+    "@bazaar/styles": "^1.0.0",
+    "lit-element": "^2.2.1",
+    "rxjs": "^6.5.2"
+  },
+  "config": {
+    "element_prefix": "neo-"
   }
 }

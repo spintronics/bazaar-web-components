@@ -5,18 +5,50 @@ import { customElement, css } from "lit-element";
 // import prop from 'ramda/es/prop';
 // import globalStyles from "@bazaar/styles";
 import { Button as MaterialButton } from "@material/mwc-button";
-import style from "./button.scss";
 
 /**
  * document
  */
 
-@customElement("neo-material-button")
+@customElement("neo-button")
 export class Button extends MaterialButton {
   static get styles() {
     return css`
       ${super.styles}
-      ${style}
+      :host {
+        --button-color: var(--color-primary, black);
+        --button-background: white;
+        --button-background--hover: var(--color-primary, white);
+        --button-color--hover: var(--button-background, black);
+        --button-background--disabled: transparent;
+        --button-color--disabled: var(--grey-light, white);
+      }
+      :host button {
+        transition: var(--transition, 0.3s all ease-in);
+      }
+      :host button .mdc-button/*, ios*/ {
+        color: var(--button-color--disabled);
+        background-color: var(--button-background--disabled);
+      }
+      :host button:after,
+      :host button:before {
+        background-color: var(--button-background--disabled);
+      }
+      :host button:not(:disabled) {
+        color: var(--button-color);
+        background-color: var(--button-background);
+        border-color: var(--button-border-color, --button-background);
+      }
+      :host button:hover {
+        background-color: var(--button-background--hover);
+        color: var(--button-color--hover);
+      }
+      :host button:before {
+        background-color: var(--button-background--active, --button-background);
+      }
+      :host button:after {
+        background-color: var(--button-background--active, --button-background);
+      }
     `;
   }
 }

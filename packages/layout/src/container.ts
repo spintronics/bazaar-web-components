@@ -1,4 +1,4 @@
-import { css, customElement } from "lit-element";
+import { css, customElement, html } from "lit-element";
 import { Media } from "./media";
 
 /**
@@ -10,13 +10,13 @@ import { Media } from "./media";
 export class Container extends Media {
   static get styles() {
     return [
-      ...super.styles,
       css`
         :host {
           flex-grow: 1;
           margin: 0 auto;
           position: relative;
           width: auto;
+          display: block;
         }
         :host([desktop]) {
           max-width: calc(var(--desktop) - var(--container-offset));
@@ -34,5 +34,10 @@ export class Container extends Media {
         }
       `
     ];
+  }
+  render() {
+    return html`
+      <slot></slot>
+    `;
   }
 }

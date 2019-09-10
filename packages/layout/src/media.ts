@@ -1,5 +1,4 @@
-import { Layout } from "./base";
-import { property, html, customElement } from "lit-element";
+import { property, html, customElement, LitElement } from "lit-element";
 import {
   fromEvent,
   Subject,
@@ -93,7 +92,7 @@ for (let key of breakpoints) {
 }
 
 @customElement("neo-media")
-export class Media extends Layout {
+export class Media extends LitElement {
   @property({ type: String }) query = "";
   @property({ type: Boolean, reflect: true }) mobile = false;
   @property({ type: Boolean, reflect: true }) tablet = false;

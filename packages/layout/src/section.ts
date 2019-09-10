@@ -1,5 +1,4 @@
-import { Layout } from "./base";
-import { css, customElement } from "lit-element";
+import { css, customElement, LitElement, html } from "lit-element";
 
 enum SectionSizes {
   small,
@@ -12,11 +11,10 @@ enum SectionSizes {
  */
 
 @customElement("neo-section")
-export class Section extends Layout {
+export class Section extends LitElement {
   static sizes = SectionSizes;
   static get styles() {
     return [
-      ...super.styles,
       css`
         :host {
           --section-padding: 3rem 1.5rem;
@@ -35,5 +33,10 @@ export class Section extends Layout {
         }
       `
     ];
+  }
+  render() {
+    return html`
+      <slot></slot>
+    `;
   }
 }

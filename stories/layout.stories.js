@@ -41,14 +41,12 @@ storiesOf("layout", module)
         </neo-hero>
       </neo-media>
       <br />
-      <neo-hero>
-        <neo-container>
-          Container
-          <neo-section>
-            Section
-          </neo-section>
-        </neo-container>
-      </neo-hero>
+      <neo-container>
+        Container
+        <neo-section>
+          Section
+        </neo-section>
+      </neo-container>
     `;
   })
   .add("row/card", _ => {

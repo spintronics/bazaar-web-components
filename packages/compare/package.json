@@ -25,5 +25,8 @@
   },
   "dependencies": {
     "lit-element": "^2.2.1"
+  },
+  "config": {
+    "element_prefix": "neo-"
   }
 }

@@ -1,4 +1,4 @@
-import { css, customElement } from "lit-element";
+import { css, customElement, html } from "lit-element";
 import { Media } from "./media";
 
 /**
@@ -8,9 +8,13 @@ import { Media } from "./media";
 
 @customElement("neo-row")
 export class Row extends Media {
+  render() {
+    return html`
+      <slot></slot>
+    `;
+  }
   static get styles() {
     return [
-      ...super.styles,
       css`
         :host([gapless]) {
           margin: 0;

@@ -53,7 +53,7 @@ storiesOf("button", module)
                 ${colors.map((color, x) => {
                   return html`
                     <td>
-                      <neo-material-button
+                      <neo-button
                         ?unelevated=${type === "unelevated"}
                         ?raised=${type === "raised"}
                         ?dense=${type === "dense"}
@@ -70,7 +70,7 @@ storiesOf("button", module)
                         )}
                         label=${color}
                       >
-                      </neo-material-button>
+                      </neo-button>
                     </td>
                   `;
                 })}

@@ -1,46 +1,121 @@
 import { LitElement, property, css, html, customElement } from "lit-element";
-import { Product as ProductSchema, AggregateRating } from "schema-dts";
+import { Product as ProductSchema } from "schema-dts";
 import "@bazaar/image";
 import "@bazaar/icon";
-// import { elementName } from '../../element-helpers';
-// import { memoize } from 'decko';
-// import { windowIsDefined } from '../../../scripts/lib';
-// import { withConnection } from 'mixins/';
+import "@bazaar/button";
+import "@bazaar/layout";
+import { broadcast } from "@bazaar/base";
+import pathOr from "ramda/es/pathOr";
+
+export enum ProductIntent {
+  add_to_cart = "add_to_cart",
+  add_to_wishlist = "add_to_wishlist",
+  add_to_compare = "add_to_compare"
+}
+
+export interface ProductAttributes {
+  model: ProductSchema;
+}
+
+//TODO: ProductWithOptions
+
 @customElement("neo-product")
 export class Product extends LitElement {
   @property({ type: Object }) model: ProductSchema = {
-    "@type": "Product"
+    "@type": "Product",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: 0
+    },
+    description: "",
+    productID: ""
   };
   static get styles() {
     return [
       super.styles || css``,
       css`
-        :host(.layout--compact) {
-          --gap: 0.75rem;
-        }
-        .image {
+        .neo-image {
           max-height: 300px;
         }
       `
     ];
   }
+  protected iconMap = {
+    wishlist: html`
+      <neo-icon>bookmark</neo-icon>
+    `,
+    add: html`
+      <neo-icon>add_shopping_cart</neo-icon>
+    `,
+    compare: html`
+      <neo-icon>compare_arrows</neo-icon>
+    `,
+    star_empty: html`
+      <neo-icon>star_border</neo-icon>
+    `,
+    star_half: html`
+      <neo-icon>star_half</neo-icon>
+    `,
+    star_filled: html`
+      <neo-icon>star</neo-icon>
+    `
+  };
   render() {
     return html`
-      <figure class="image">
-        <neo-image src=${this.model.image} lazy></neo-image>
-      </figure>
-      <strong>${this.model.name}</strong>
-      <div class="rating">
-        ${/*this.model.aggregateRating
-          ? Array(5)
-              .fill(0)
-              .map((_, x) => {
-                return (
-                  (<AggregateRating>this.model.aggregateRating).ratingValue >= x
-                );
-              })
-          : */ ""}
-      </div>
+      <neo-card>
+        <figure slot="content" class="image">
+          <neo-image src=${this.model.image}></neo-image>
+        </figure>
+        <div slot="content">
+          <strong>${this.model.name}</strong>
+          <div class="rating">
+            ${this.model.aggregateRating
+              ? Array(5)
+                  .fill(
+                    pathOr(0, ["aggregateRating", "ratingValue"], this.model)
+                  )
+                  .map((rating, x) => {
+                    let star =
+                      "star_" +
+                      (rating && rating >= x + 1
+                        ? "filled"
+                        : rating >= x + 0.5
+                        ? "half"
+                        : "empty");
+                    return html`
+                      ${this.iconMap[star]}
+                    `;
+                  })
+              : ""}
+          </div>
+          <p class="description">
+            ${this.model.description}
+          </p>
+        </div>
+        <div slot="footer" class="product-actions">
+          <neo-button
+            @click=${broadcast({
+              type: ProductIntent.add_to_cart,
+              data: { productID: this.model.productID, quantity: 1 }
+            })}
+            >${this.iconMap.add}</neo-button
+          >
+          <neo-button
+            @click=${broadcast({
+              type: ProductIntent.add_to_wishlist,
+              data: { productID: this.model.productID, quantity: 1 }
+            })}
+            >${this.iconMap.wishlist}</neo-button
+          >
+          <neo-button
+            @click=${broadcast({
+              type: ProductIntent.add_to_compare,
+              data: { productID: this.model.productID }
+            })}
+            >${this.iconMap.compare}</neo-button
+          >
+        </div>
+      </neo-card>
     `;
   }
 }
@@ -48,6 +123,9 @@ export class Product extends LitElement {
 /**
 import {Product} from '@kibo-custom-elements/product'
 import {ConnectedMixin} from '@kibo-mixins/connected-mixin'
+
+write product information into ld+jsod in head
+then load the product model from there and pass it into this element
 
 window.customElements.define(
  'kibo-product',

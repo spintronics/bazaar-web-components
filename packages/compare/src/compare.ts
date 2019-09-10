@@ -1,3 +1,3 @@
-// export class Compare extends LitElement {
+// export class ProductCompare extends LitElement {
 
 // }

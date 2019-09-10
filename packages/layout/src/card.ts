@@ -1,11 +1,9 @@
-import { css, html, customElement } from "lit-element";
-import { Layout } from "./base";
+import { css, html, customElement, LitElement } from "lit-element";
 
 @customElement("neo-card")
-export class Card extends Layout {
+export class Card extends LitElement {
   static get styles() {
     return [
-      ...super.styles,
       css`
         :host {
           box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);

@@ -1,8 +1,14 @@
 /// <reference path="../../globals.d.ts" />
 
-import { customElement, property, html, query, LitElement } from "lit-element";
+import {
+  customElement,
+  property,
+  html,
+  query,
+  LitElement,
+  css
+} from "lit-element";
 import { withIntersectionObserver } from "@bazaar/base";
-import style from "./image.scss";
 import compose from "ramda/es/compose";
 import { ifDefined } from "lit-html/directives/if-defined";
 
@@ -29,7 +35,39 @@ export class Image
     })
   )(LitElement)
   implements IImage {
-  static styles = [style];
+  static styles = [
+    css`
+      :host {
+        display: block;
+        position: relative;
+      }
+      ::slotted(*),
+      img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        margin: 0 auto;
+        width: auto;
+        transition: opacity var(--speed, 86ms) var(--easing, ease-out);
+        opacity: 1;
+      }
+      slot[hidden] {
+        display: none;
+      }
+      img[hidden] {
+        opacity: 0;
+      }
+
+      :host([rounded]) > img {
+        border-radius: var(--radius-rounded, 290486px);
+      }
+
+      :host([fullwidth]) > img {
+        width: 100%;
+      }
+    `
+  ];
   protected _src = "";
   protected loaded = false;
   @property({ type: Boolean }) lazy = false;
@@ -65,10 +103,12 @@ export class Image
     `;
   }
   onLoad() {
+    let old = this.loaded;
     this.loaded = true;
-    this.requestUpdate();
+    if (old !== this.loaded) this.requestUpdate();
   }
   intersectionCallback(entries) {
+    console.log(entries);
     if (entries.some(({ isIntersecting }) => isIntersecting)) {
       if (this.lazy && this.src) {
         this._src = this.src;

@@ -1,6 +1,5 @@
-import { Layout } from "./base";
 import { html } from "lit-html";
-import { css, customElement } from "lit-element";
+import { css, customElement, LitElement } from "lit-element";
 
 /**
  * @cssvar background-color
@@ -8,17 +7,18 @@ import { css, customElement } from "lit-element";
  */
 
 @customElement("neo-hero")
-export class Hero extends Layout {
+export class Hero extends LitElement {
   static get styles() {
     return [
-      ...super.styles,
       css`
-        --background-color: white;
-        --color: black;
-        align-items: stretch;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        :host {
+          --background-color: white;
+          --color: black;
+          align-items: stretch;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
         ::slotted(*) {
           flex-grow: 1;
           flex-shrink: 0;

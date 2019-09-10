@@ -5,9 +5,9 @@
   "author": "spintronics <kevinbrown5124@gmail.com>",
   "homepage": "https://github.com/spintronics/bazaar-web-components#readme",
   "license": "MIT",
-  "main": "variables.style.js",
+  "main": "styles.js",
   "config": {
-    "element_prefix": "abu-"
+    "element_prefix": "neo-"
   },
   "directories": {
     "src": "src",

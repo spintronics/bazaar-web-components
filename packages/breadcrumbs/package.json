@@ -1,11 +1,11 @@
 {
-  "name": "@bazaar/map",
+  "name": "breadcrumbs",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "spintronics <kevinbrown5124@gmail.com>",
   "homepage": "https://github.com/spintronics/bazaar-web-components#readme",
   "license": "MIT",
-  "main": "map.js",
+  "main": "breadcrumbs.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -24,12 +24,7 @@
     "url": "https://github.com/spintronics/bazaar-web-components/issues"
   },
   "dependencies": {
-    "@bazaar/base": "^1.0.0",
-    "lit-element": "^2.2.1",
-    "ramda": "^0.26.1"
-  },
-  "devDependencies": {
-    "@types/googlemaps": "^3.37.3"
+    "lit-element": "^2.2.1"
   },
   "config": {
     "element_prefix": "neo-"
